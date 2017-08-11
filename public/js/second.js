@@ -12,6 +12,9 @@ var mode = 'cold';
 $(document).ready(function(){
 	$('#code1').focus();
 	//changeContainer('container-2');
+
+
+	ga('send', 'event', 'Arcelik', 'Klima', 'Mobil');
 });
 
 function changeContainer(id){
@@ -51,6 +54,8 @@ $('.form-control').on('keyup', function(){
 $('#inputFan').on('change',function(){
 	var val = fanStart + Math.round(Math.round($('#inputFan').val() * (fanEnd - fanStart)) / 100);
 	$('#fanInfo').text(val);
+
+	ga('send', 'event', 'Arcelik', 'Klima', 'Fan-Slider');
 });
 
 
@@ -63,6 +68,8 @@ $('#btnFan').on('click', function(){
 
 		var val = fanStart + Math.round(Math.round($('#inputFan').val() * (fanEnd - fanStart)) / 100);
 		$('#fanInfo').text(val);
+
+		ga('send', 'event', 'Arcelik', 'Klima', 'Fan-Button');
 	}
 	
 });
@@ -98,6 +105,8 @@ var socketMove = function(options){
 				code: code1.value + code2.value + code3.value + code4.value,
 				user: options.player,
 			});
+
+			ga('send', 'event', 'Arcelik', 'Klima', 'Mobil-Connect');
 		}
 	});
 
@@ -112,6 +121,8 @@ var socketMove = function(options){
 			socket.emit('turnOnOff', {
 				value: true,
 			});
+
+			ga('send', 'event', 'Arcelik', 'Klima', 'TurnOff');
 		}
 		else{
 			status = true;
@@ -123,6 +134,8 @@ var socketMove = function(options){
 			socket.emit('turnOnOff', {
 				value: false,
 			});
+
+			ga('send', 'event', 'Arcelik', 'Klima', 'TurnOn');
 		}
 		
 	});
@@ -135,6 +148,8 @@ var socketMove = function(options){
 		socket.emit('changeTemp', {
 			value: val,
 		});
+
+		ga('send', 'event', 'Arcelik', 'Klima', 'Temp-Slider');
 	});
 
 	$('#btnCold').on('click', function(){
@@ -153,6 +168,8 @@ var socketMove = function(options){
 			});
 
 			mode = 'cold';
+
+			ga('send', 'event', 'Arcelik', 'Klima', 'Cold-Button');
 		}
 	});
 
@@ -172,6 +189,8 @@ var socketMove = function(options){
 			});
 
 			mode = 'hot';
+
+			ga('send', 'event', 'Arcelik', 'Klima', 'Hot-Button');
 		}
 		
 	});
@@ -210,6 +229,8 @@ var socketMove = function(options){
 					value: val,
 				});
 			}
+
+			ga('send', 'event', 'Arcelik', 'Klima', 'JetMod-Button');
 		}
 		
 		

@@ -1,4 +1,6 @@
-
+window.onload = function(){
+	ga('send', 'event', 'Arcelik', 'Klima', 'Masthead');
+}
 //All Function
 function onOff(){
 	if($('#onoff').css('display') == 'none'){
