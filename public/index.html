@@ -1,19 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Arçelik - Klima</title>
+
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>Basketball</title>
+    <!--Socket IO-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="css/mobilestyles.css">    
+
+
+
 </head>
 <body>
+
+	<div id="container-1" class="container">
+		<div class="row">
+			<div class="col-xs-12" style="text-align: center;">
+				<img src="img/logo.png" class="header-img" />
+			</div>
+		</div>
+		<div class="row" style="margin-top: 100px;">
+			<div class="col-xs-12" style="text-align: center;">
+				<p class="intro-text">
+					Eşleştirme için aşağıya<br>onedio.com bannerda gördüğünüz<br>kodu girin.
+				</p>
+			</div>
+		</div>
+
+		<div class="form-group row">
+		  	<div class="col-xs-3">
+			    <input class="form-control" id="code1" type="text" maxlength="1" pattern="[0-9]*" tabindex="1">
+		  	</div>
+		  	<div class="col-xs-3">
+		    	<input class="form-control" id="code2" type="text" maxlength="1" pattern="[0-9]*" tabindex="2">
+		  	</div>
+		  	<div class="col-xs-3">
+		    	<input class="form-control" id="code3" type="text" maxlength="1" pattern="[0-9]*" tabindex="3">
+		  	</div>
+		  	<div class="col-xs-3">
+		    	<input class="form-control" id="code4" type="text" maxlength="1" pattern="[0-9]*" tabindex="4">
+		  	</div>
+		</div>
+
+		<div class="row" style="text-align: center; margin-top: 50px;">
+			<div class="col-xs-12">
+				<button type="button" class="btn btn-okey">Tamam</button>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<div id="container-2" class="container" style="display: none;">
+		<div class="row">
+			<div class="col-xs-3" style="text-align: center;">
+				<img src="img/connect.png" class="header-img" />
+			</div>
+			<div class="col-xs-6" style="text-align: center;">
+				<img src="img/logo.png" class="header-img" />
+			</div>
+			<div class="col-xs-3" style="text-align: center;">
+				<img src="img/alert.png" class="header-img" data-toggle="modal" data-target="#myModal" />
+			</div>
+		</div>
+
+		<div class="opacity">
+			<div class="row temprature">
+				<div id="tempVal" class="col-xs-12" style="text-align: center;" >
+					20°C
+				</div>
+			</div>
+
+			<div class="row" style="margin-bottom: 20px;">
+				<div class="col-xs-12" style="text-align: center;">
+					<label for="inputTemprature" class="left">HEDEF SICAKLIK</label>
+					<label id="tempInfo" for="inputTemprature" class="right">20°C</label>
+					<input type="range" id="inputTemprature" disabled>
+				</div>
+			</div>
+
+			<div class="row" style="margin-bottom: 50px;">
+				<div class="col-xs-12" style="text-align: center;">
+					<label for="inputFan" class="left">FAN HIZI</label>
+					<label id="fanInfo" for="inputFan" class="right">2</label>
+					<input type="range" id="inputFan" disabled>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-3" style="text-align: center;">
+					<div id="btnCold" class="icon active" group="btn">
+						<img src="img/cold.png" />
+					</div>
+					<label id="lblbtnCold" class="iconInfo active" group="btn">Soğutma</label>
+				</div>
+
+				<div class="col-xs-3" style="text-align: center;">
+					<div id="btnHot" class="icon" group="btn">
+						<img src="img/hot.png" />
+					</div>
+					<label id="lblbtnHot" class="iconInfo" group="btn">Isıtma</label>
+				</div>
+
+				<div class="col-xs-3" style="text-align: center;">
+					<div id="btnFan" class="icon" group="btn">
+						<img src="img/fan.png" />
+					</div>
+					<label id="lblbtnFan" class="iconInfo" group="btn">Fan</label>
+				</div>
+
+				<div class="col-xs-3" style="text-align: center;">
+					<div id="btnJetMod" class="icon" group="btn">
+						<img src="img/jetmod.png" />
+					</div>
+					<label id="lblbtnJetMod" class="iconInfo" group="btn">Jet Mod</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<p class="download">
+						Daha fazla özellik için Arçelik Connect<br>uygulamasını telefonunuza yüklemek için <a href="https://google.com" target="_blank">tıklayın.</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12" style="text-align: center;">
+				<label class="turnonoff">Klimayı Aç</label><br>
+				<img src="img/turnonoff.png" id="btnTurnOnOff" />
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+		  		<div class="modal-header">
+		  			<img src="img/close.png" data-dismiss="modal" class="close" />
+		  		</div>
+		  		<div class="modal-body">
+		    		<a href="http://google.com" target="_blank">
+		    			<img src="img/banner.png" />
+		    		</a>
+		  		</div>
+			</div>
+		</div>
+	</div>
 	
-	<div id="xyz"></div>
 
 
 
-	<script src="/js/basketball.js"></script>
+	<!-- jQuery first, then Tether, then Bootstrap JS. -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+
+    <script src="/js/second.js"></script>
+	<script>
+		var options = {
+			player : 'second',
+			deviceType : 'mobile',
+			
+		};
+
+		var secondscreen = new socketMove(options);
+
+		
+
+	</script>
+
+
+
+
 </body>
 </html>

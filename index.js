@@ -15,13 +15,25 @@ app.use(express.static('public'));
 var io = socket(server);
 
 io.on('connection', function(socket){
-	console.log('made socket connection socketid: ' + socket.id);
 
-	socket.on('chat', function(data){
-		io.sockets.emit('chat', data);
-	});	
-
-	socket.on('typing', function(data){
-		socket.broadcast.emit('typing', data);
+	socket.on('joinRoom', function(data){
+		socket.room = data.code;
+		socket.join(data.code);
+		socket.user = data.user;
 	});
+
+	socket.on('changeTemp', function(data){
+		io.to(socket.room).emit('changeTemp', data);
+	});
+
+	socket.on('turnOnOff', function(data){
+		io.to(socket.room).emit('turnOnOff', data);
+	});
+
+	socket.on('disconnect', function () {
+
+      
+  });
+
 });
+
