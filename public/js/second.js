@@ -15,6 +15,15 @@ $(document).ready(function(){
 
 
 	ga('send', 'event', 'Arcelik', 'Klima', 'Mobil');
+
+	var ios = navigator.userAgent.match('iPhone');
+
+	if(ios){
+		document.getElementById('downloadURL').href="http://bit.ly/2wI7nlc";
+	}
+	else {
+		document.getElementById('downloadURL').href="http://bit.ly/2vBlSHi";
+	}
 });
 
 function changeContainer(id){

@@ -52,6 +52,16 @@ var socketMove = function(options){
 
 	socket.on('changeTemp', function(data){
 		airdegree.innerHTML = data.value;
+
+		if(data.value>25){
+			parent.arcelikMastheadMsg("sicak"); 
+		}
+		else if(data.value<=25 && data.value>22){
+			parent.arcelikMastheadMsg("normal"); 
+		}
+		else{
+			parent.arcelikMastheadMsg("soguk"); 
+		}	
 	});
 }
 
