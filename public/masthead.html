@@ -12,7 +12,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-    <link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css">  
 
 	<!-- Google Analytics -->
     <script>
@@ -26,85 +26,17 @@
         ga('create', 'UA-59795261-1', 'auto');
         ga('send', 'pageview');
     </script>
-    <!-- End Google Analytics -->  
-
-    <style>
-    	
-
-		@font-face {
-		  font-family: 'GothamRounded-Bold';
-		  src: url('https://arcelik.onedio.com/fonts/GothamRounded-Bold.woff') format('woff'),
-		       url('https://arcelik.onedio.com/fonts/GothamRounded-Bold.ttf') format('truetype'),
-		       url('https://arcelik.onedio.com/fonts/GothamRounded-Bold.svg#GothamRounded-Bold') format('svg');
-		  font-weight: normal;
-		  font-style: normal;
-		}
-
-
-		#airdegree{
-			font-family: 'Teko', sans-serif;
-			color: #fff; 
-			font-size: 45px;
-			position: absolute;
-			top: 50px;
-			left: 760px;
-			text-shadow: 1px 1px 0px #fff, 0 0 3px #fff, 0 0 5px #fff;
-			display: none;
-			opacity: 0.8;
-			font-weight: bold;
-		}
-
-		#onoff{
-			position: absolute;
-		    left: 768px;
-		    top: 100px;
-		    display: none;
-		    opacity: 0.8;
-		}
-
-		#code{
-			font-family: 'GothamRounded-Bold';
-			color: #1e1e1c;
-			font-size: 35px;
-		    position: absolute;
-		    left: 838px;
-		    top: 100px;
-		    letter-spacing: 7px;
-		}
-
-		#refresh{
-			font-family: 'GothamRounded-Bold';
-		    color: #1e1e1c;
-		    font-size: 12px;
-		    position: absolute;
-		    left: 838px;
-		    top: 142px;
-		    opacity: 0.4;
-		    cursor: pointer;
-		}
-
-		#bgeffect{
-			position: absolute;
-		    top: 185px;
-		    left: 227px;
-		    display: none;
-		}
-
-		.container{
-			background-color: #1D1D1D;
-		}
-
-    </style>  
+    <!-- End Google Analytics -->    
 
 </head>
 <body>
 
-	<div style="background-image: url('https://arcelik.onedio.com/img/bg.png'); width: 970px; height: 250px;">
+	<div style="background-image: url('img/bg.png'); width: 970px; height: 250px;">
 		<div id="airdegree">20</div>
-		<img id="onoff" src="https://arcelik.onedio.com/img/onoff.png" />
+		<img id="onoff" src="img/onoff.png" />
 		<div id="code"></div>
-		<img id="bgeffect" src="https://arcelik.onedio.com/img/bg-effect.png" />
-		<div id="refresh" style="z-index: 3;">Kodu değiştir <img src="https://arcelik.onedio.com/img/refresh.png" /></div>
+		<img id="bgeffect" src="img/bg-effect.png" />
+		<div id="refresh" style="z-index: 3;">Kodu değiştir <img src="img/refresh.png" /></div>
 	</div>
 
 	<a href="http://bit.ly/2vtdM3q" target="_blank" style="position: absolute; left: 0; top: 0; width: 970px; height:250px; display: inline-block; z-index: 2;"></a>
@@ -116,6 +48,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
+    <script src="/js/first.js"></script>
 	<script>
 		var options = {
 			player : 'first',
@@ -123,71 +56,7 @@
 			
 		};
 
-
-		window.onload = function(){
-			ga('send', 'event', 'Arcelik', 'Klima', 'Masthead');
-
-			//Make connection
-			var socket = io.connect('https://arcelik.onedio.com/', {secure: true});
-
-			//Query DOM
-			var code = document.getElementById('code');
-			var refresh = document.getElementById('refresh');
-			var airdegree = document.getElementById('airdegree');
-
-
-			generateCode();
-			
-			function generateCode(){
-				//socket.leave(code.innerText);
-
-				var codeValue = Math.floor((Math.random() * 8999) + 1000);
-				code.innerHTML = codeValue;
-
-				socket.emit('joinRoom', {
-					code: codeValue,
-					user: options.player,
-				});
-			}
-			
-			refresh.addEventListener('click', function(){
-				generateCode();
-			});
-			
-			//Listen for events
-			socket.on('turnOnOff', function(data){
-				onOff();
-			});	
-
-			socket.on('changeTemp', function(data){
-				airdegree.innerHTML = data.value;
-
-				if(data.value>25){
-					parent.arcelikMastheadMsg("sicak"); 
-				}
-				else if(data.value<=25 && data.value>22){
-					parent.arcelikMastheadMsg("normal"); 
-				}
-				else{
-					parent.arcelikMastheadMsg("soguk"); 
-				}	
-			});
-		}
-		//All Function
-		function onOff(){
-			if($('#onoff').css('display') == 'none'){
-				$('#bgeffect').fadeIn('slow');
-				$('#onoff').fadeIn('slow');
-				$('#airdegree').fadeIn('slow');
-			}
-			else{
-				$('#bgeffect').fadeOut('slow');
-				$('#onoff').fadeOut('slow');
-				$('#airdegree').fadeOut('slow');
-			}
-			
-		}
-
+		var secondscreen = new socketMove(options);
 
 
 

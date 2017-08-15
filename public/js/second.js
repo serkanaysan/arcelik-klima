@@ -31,6 +31,13 @@ function changeContainer(id){
 	$('#'+id).fadeIn('slow');
 }
 
+$('#alert').on('click', function(){
+	$("#myModal").modal();
+	ga('send', 'event', 'Arcelik', 'Klima', 'Bildirim');
+});
+	
+
+
 $('.form-control').on('keyup', function(){
 	if($(this).attr('id') == 'code1'){
 		$('#code2').focus();
