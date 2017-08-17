@@ -19,7 +19,7 @@ function onOff(){
 
 var socketMove = function(options){
 	//Make connection
-	var socket = io.connect('http://arcelik.onedio.com/');
+	var socket = io.connect('https://arcelik.onedio.com/', {secure: true});
 
 	//Query DOM
 	var code = document.getElementById('code');
