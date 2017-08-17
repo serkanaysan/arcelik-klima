@@ -4,8 +4,8 @@ var socket = require('socket.io');
 
 //App setup
 var app = express();
-var server = app.listen(443, function(){
-	console.log('listening to request on port 443');
+var server = app.listen(8080, function(){
+	console.log('listening to request on port 8080');
 });
 
 //Static files
