@@ -102,7 +102,7 @@ function changeActiveButton(id){
 
 var socketMove = function(options){
 	//Make connection
-	var socket = io.connect('http://localhost:8080/');
+	var socket = io.connect('https://arcelik.onedio.com/', {secure: true});
 
 	//Query DOM
 	var code1 = document.getElementById('code1');

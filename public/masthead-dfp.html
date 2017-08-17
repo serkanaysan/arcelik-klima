@@ -99,12 +99,12 @@
 </head>
 <body>
 
-	<div style="background-image: url('http://arcelik.onedio.com/img/bg.png'); width: 970px; height: 250px;">
+	<div style="background-image: url('https://arcelik.onedio.com/img/bg.png'); width: 970px; height: 250px;">
 		<div id="airdegree">20</div>
-		<img id="onoff" src="http://arcelik.onedio.com/img/onoff.png" />
+		<img id="onoff" src="https://arcelik.onedio.com/img/onoff.png" />
 		<div id="code"></div>
-		<img id="bgeffect" src="http://arcelik.onedio.com/img/bg-effect.png" />
-		<div id="refresh" style="z-index: 3;">Kodu değiştir <img src="http://arcelik.onedio.com/img/refresh.png" /></div>
+		<img id="bgeffect" src="https://arcelik.onedio.com/img/bg-effect.png" />
+		<div id="refresh" style="z-index: 3;">Kodu değiştir <img src="https://arcelik.onedio.com/img/refresh.png" /></div>
 	</div>
 
 	<a href="http://bit.ly/2vtdM3q" target="_blank" style="position: absolute; left: 0; top: 0; width: 970px; height:250px; display: inline-block; z-index: 2;"></a>
@@ -131,7 +131,7 @@ onedio.innerHTML = 'oio.init(function() {jQuery.ajaxSetup({cache: true}); $.getS
 parent.document.head.appendChild(onedio); 
 
 			//Make connection
-			var socket = io.connect('http://arcelik.onedio.com/');
+			var socket = io.connect('https://arcelik.onedio.com/', {secure: true});
 
 			//Query DOM
 			var code = document.getElementById('code');
